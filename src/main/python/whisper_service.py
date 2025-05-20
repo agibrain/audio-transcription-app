@@ -8,7 +8,7 @@ import subprocess
 app = Flask(__name__)
 
 # Configure logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
 
 # Load the Whisper model (you can choose different sizes: tiny, base, small, medium, large)

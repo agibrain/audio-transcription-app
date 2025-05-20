@@ -47,7 +47,6 @@ public class AudioTranscriptionController {
             logger.debug("Received file: {} with size: {} bytes",
                     file.getOriginalFilename(), file.getSize());
 
-            // Create multipart request
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
@@ -62,7 +61,6 @@ public class AudioTranscriptionController {
 
             HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
-            // Call Whisper service
             ResponseEntity<String> response = restTemplate.postForEntity(
                     WHISPER_SERVICE_URL,
                     requestEntity,
