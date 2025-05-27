@@ -21,5 +21,9 @@ COPY src/main/python/whisper_service.py .
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
 
+# Add after the initial setup
+RUN useradd -m appuser
+USER appuser
+
 # Run the application
 CMD ["python", "whisper_service.py"] 

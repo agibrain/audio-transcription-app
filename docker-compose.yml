@@ -11,6 +11,17 @@ services:
       - ./python-service:/app
     environment:
       - FLASK_ENV=development
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
 
   springboot-backend:
     build:
@@ -19,6 +30,34 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - whisper-service
+      whisper-service:
+        condition: service_healthy
     environment:
-      - WHISPER_SERVICE_URL=http://whisper-service:5000 
+      - WHISPER_SERVICE_URL=http://whisper-service:5000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+
+networks:
+  default:
+    driver: bridge
+
+# Good practices found:
+# - Uses version 3.8
+# - Proper service dependencies defined
+# - Environment variables for service communication
+# - Port mappings are correctly defined
+
+# Suggestions for improvement:
+# - Add healthchecks for both services
+# - Consider adding resource limits (memory, CPU)
+# - Add restart policies
+# - Consider adding networks configuration 
