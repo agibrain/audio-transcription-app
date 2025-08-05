@@ -28,8 +28,11 @@ import org.slf4j.LoggerFactory;
 @RequestMapping("/audio")
 public class AudioTranscriptionController {
     private static final Logger logger = LoggerFactory.getLogger(AudioTranscriptionController.class);
+
+    @org.springframework.beans.factory.annotation.Value("${whisper.service.url}")
+    private String WHISPER_SERVICE_URL;
+
     private final RestTemplate restTemplate = new RestTemplate();
-    private final String WHISPER_SERVICE_URL = "http://localhost:5000/transcribe";
 
     /**
      * Rest API to transcribe the audio file using whisper service
@@ -38,7 +41,7 @@ public class AudioTranscriptionController {
      * @return {@link ResponseEntity}
      */
     @PostMapping("/api/transcribe")
-    public ResponseEntity<?> transcribe(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<?> transcribe(@RequestParam MultipartFile file) {
         if (file.isEmpty()) {
             return ResponseEntity.badRequest().body("Please select a file to upload");
         }
