@@ -65,10 +65,10 @@ Create local env-files (optional):
 
 ```bash
 # backend/src/main/resources/application.properties
-whisper.service.url=http://localhost:5000/transcribe
+whisper.service.url=https://subhrajeetghosh-audio-transcriber.hf.space/transcribe
 
 # frontend/.env.local
-VITE_JAVA_API=http://localhost:8080
+VITE_JAVA_API=https://audio-transcription-backend-f5q4.onrender.com
 ```
 
 ### 3. Start the Python Whisper service
@@ -155,8 +155,8 @@ The Python microservice itself exposes the same contract at `POST /transcribe`.
 
 | Component | Property/Env | Default | Description |
 |-----------|--------------|---------|-------------|
-| Backend | `whisper.service.url` | `http://localhost:5000/transcribe` | Target Python endpoint |
-| Frontend | `VITE_JAVA_API` | `http://localhost:8080` | Base URL for Spring Boot |
+| Backend | `whisper.service.url` | `https://subhrajeetghosh-audio-transcriber.hf.space/transcribe` | Target Python endpoint |
+| Frontend | `VITE_JAVA_API` | `https://audio-transcription-backend-f5q4.onrender.com` | Base URL for Spring Boot |
 | Backend | `spring.servlet.multipart.max-file-size` | `10MB` | Upload size limit |
 
 ---
