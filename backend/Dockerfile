@@ -3,14 +3,14 @@
 # ------------------------------
 FROM maven:3.9.6-eclipse-temurin-17 AS build
 
-# Create working directory inside container
+# Set working directory inside container
 WORKDIR /app
 
-# Copy the entire back-end source tree (including Maven wrapper)
-COPY . .
+# Copy ONLY the backend module into the image (faster build, ensures mvnw is at /app)
+COPY backend/ .
 
-# Build the jar (tests are skipped to speed up image builds)
-RUN ./mvnw -B clean package -DskipTests
+# Make sure the Maven wrapper is executable and build the jar (skip tests to speed things up)
+RUN chmod +x mvnw && ./mvnw -B clean package -DskipTests
 
 # ------------------------------
 # Run stage: slim JRE image to actually run the jar
