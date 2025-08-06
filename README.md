@@ -1,4 +1,4 @@
-# 🎙️ Audio-Transcribe
+# 🎙️ Automatic Speech Recognition Application
 
 Provide a lightweight, full-stack web solution that lets anyone upload an audio file and instantly receive an accurate text transcription. It serves as:
 A demo of integrating OpenAI Whisper into a production-ready microservice stack.
