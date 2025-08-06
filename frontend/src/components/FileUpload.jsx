@@ -9,6 +9,8 @@ const FileUpload = () => {
     setFile(event.target.files[0]);
   };
 
+  const API_BASE = import.meta.env.VITE_JAVA_API;
+
   const handleUpload = async () => {
     if (!file) {
       alert('Please select a file first!');
@@ -20,7 +22,7 @@ const FileUpload = () => {
     formData.append('file', file);
 
     try {
-      const response = await fetch('http://localhost:8080/audio/api/transcribe', {
+      const response = await fetch(`${API_BASE}/audio/api/transcribe`, {
         method: 'POST',
         body: formData,
       });
